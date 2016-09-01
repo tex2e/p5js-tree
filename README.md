@@ -7,10 +7,10 @@ a recursive tree generator
 Sample
 -------------
 
-![tree1](img/sample/tree1)
-![tree2](img/sample/tree2)
-![tree3](img/sample/tree3)
-![tree4](img/sample/tree4)
-![tree5](img/sample/tree5)
-![tree6](img/sample/tree6)
-![tree7](img/sample/tree7)
+![tree1](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree1.png)
+![tree2](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree2.png)
+![tree3](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree3.png)
+![tree4](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree4.png)
+![tree5](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree5.png)
+![tree6](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree6.png)
+![tree7](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree7.png)
