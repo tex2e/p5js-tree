@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/normalize.css" charset="utf-8">
+    <link rel="stylesheet" href="css/common.css" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="css/bootstrap-colorpicker.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.min.js"></script>
+    <script src="js/lib/bootstrap-colorpicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+  </head>
+  <body>
+    <form class="settings">
+      <h3>Drawing Settings</h3>
+
+      <div class="form-group">
+        <label for="js_branch_color">Color</label>
+        <div id="js_branch_color" class="input-group colorpicker-component">
+          <input type="text" value="#00AABB" class="form-control" />
+          <span class="input-group-addon"><i></i></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="js_nest">Nest</label><br>
+        <input id="js_nest" type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="js_start_branch_length">Branch Length</label><br>
+        <input id="js_start_branch_length" type="text"/>
+      </div>
+
+      <br>
+
+      <div class="form-group">
+        <label for="js_right_branch_magnification_rate">Right Branch Magnification Rate</label>
+        <input id="js_right_branch_magnification_rate" type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="js_center_branch_magnification_rate">Center Branch Magnification Rate</label>
+        <input id="js_center_branch_magnification_rate" type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="js_left_branch_magnification_rate">Left Branch Magnification Rate</label>
+        <input id="js_left_branch_magnification_rate" type="text"/>
+      </div>
+
+      <br>
+
+      <div class="form-group">
+        <label for="js_right_rotation">Right Rotation</label><br>
+        <input id="js_right_rotation" type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="js_center_rotation">Center Rotation</label>
+        <input id="js_center_rotation" type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="js_left_rotation">Left Rotation</label><br>
+        <input id="js_left_rotation" type="text"/>
+      </div>
+
+      <br>
+
+      <div class="form-group">
+        <label for="js_right_rotation_rate">Right Rotation Rate</label>
+        <input id="js_right_rotation_rate" type="text"/>
+      </div>
+      <div class="form-group">
+        <label for="js_left_rotation_rate">Left Rotation Rate</label>
+        <input id="js_left_rotation_rate" type="text"/>
+      </div>
+
+      <button class="btn btn-primary" type="button" name="button" onclick="save('my-tree.png');">
+        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+        Save
+      </button>
+      <button class="btn btn-success" type="button" name="button" onclick="drawTree();">
+        <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>
+        Redraw
+      </button>
+    </form>
+
+    <h1>Recursive Tree Renderer</h1>
+
+    <!-- core JavaScript ================================================== -->
+    <script src="js/main.js"></script>
+  </body>
+</html>
