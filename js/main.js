@@ -9,7 +9,7 @@ window.Settings = {
   leftBranchMagnificationRate:   [0.3, 0.7], // [min, max]
   rightRotation: Math.PI / 4,
   leftRotation:  Math.PI / 4,
-  rotationCenter:     [-0.3, 0.3], // [min, max]
+  rotationCenter:    [-0.3, 0.3], // [min, max]
   rightRotationRate: [0.6, 0.9],  // [min, max]
   leftRotationRate:  [0.6, 0.9],  // [min, max]
 }
@@ -17,6 +17,13 @@ window.Settings = {
 function setup() {
   createCanvas(640, 640);
   drawTree();
+}
+
+function mouseClicked() {
+  if (0 <= mouseX && mouseX < width &&
+      0 <= mouseY && mouseY < height) {
+    drawTree();
+  }
 }
 
 function drawTree() {
@@ -63,10 +70,12 @@ function branch(beginX, beginY, length, nest) {
 }
 
 
+// === Drawing Settings ===
+
 // --- color picker ---
 
 $('#js_branch_color').colorpicker({
-  color: '#000000'
+  color: Settings.branchColor
 }).on('hidePicker', function () {
   Settings.branchColor = $(this).data('colorpicker').color.toHex();
 });
