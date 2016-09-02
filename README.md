@@ -16,3 +16,4 @@ Sample
 ![tree5](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree5.png)
 ![tree6](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree6.png)
 ![tree7](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree7.png)
+![tree8](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree8.png)
