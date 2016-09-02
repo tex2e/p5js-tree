@@ -41,6 +41,8 @@ function branch(beginX, beginY, length, nest) {
   if (nest === undefined) nest = 10;
   if (nest === 0) return;
 
+  if (length <= 0.01) return;
+
   // --- draw line ---
   var endX = beginX;
   var endY = beginY + length;
@@ -48,22 +50,22 @@ function branch(beginX, beginY, length, nest) {
   if (nest === 1) return;
 
   // --- new branch (recursion) ---
-  var rotateRight  = -Settings.rightRotation * random.apply(null, Settings.rightRotationRate);
+  var rotateRight  =  Settings.rightRotation * random.apply(null, Settings.rightRotationRate);
   var rotateCenter =  random.apply(null, Settings.rotationCenter);
-  var rotateLeft   =  Settings.leftRotation  * random.apply(null, Settings.leftRotationRate);
+  var rotateLeft   = -Settings.leftRotation  * random.apply(null, Settings.leftRotationRate);
 
   translate(endX, endY);
 
   rotate(rotateRight);
-  branch(0, 0, length * random(0.3, 0.8), nest - 1);
+  branch(0, 0, length * random.apply(null, Settings.rightBranchMagnificationRate), nest - 1);
   rotate(-rotateRight);
 
   rotate(rotateCenter);
-  branch(0, 0, length * random(0.5, 0.9), nest - 1);
+  branch(0, 0, length * random.apply(null, Settings.centerBranchMagnificationRate), nest - 1);
   rotate(-rotateCenter);
 
   rotate(rotateLeft);
-  branch(0, 0, length * random(0.3, 0.8), nest - 1);
+  branch(0, 0, length * random.apply(null, Settings.leftBranchMagnificationRate), nest - 1);
   rotate(-rotateLeft);
 
   translate(-endX, -endY);
