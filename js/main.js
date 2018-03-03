@@ -86,7 +86,7 @@ $('#js_branch_color').colorpicker({
 
 $('#js_nest').slider({
   min: 0,
-  max: 10,
+  max: 11,
   step: 1,
   value: Settings.nest,
 }).on('slideStop', function () {
