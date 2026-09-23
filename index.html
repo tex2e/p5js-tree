@@ -1,103 +1,143 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ja">
   <head>
     <meta charset="utf-8">
-    <title>Recursive Tree Renderer</title>
-    <link rel="stylesheet" href="css/normalize.css" charset="utf-8">
-    <link rel="stylesheet" href="css/common.css" charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/css/bootstrap-slider.min.css">
-    <link rel="stylesheet" href="css/bootstrap-colorpicker.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.min.js"></script>
-    <script src="js/lib/bootstrap-colorpicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f4ef">
+    <meta name="description" content="枝の広がりや色を調整して、自分だけの樹形を描くジェネラティブアート。">
+    <title>枝のかたち — Generative Tree Studio</title>
+    <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
   </head>
   <body>
-    <a href="https://github.com/tex2e/p5js-tree" class="fork-me-on-github">
-      <img style="position: absolute; top: 0; right: 0; border: 0;"
-        src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
-        alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
-    </a>
+    <main class="app-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="枝のかたち ホーム">
+          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 35V8m0 15-9-8m9 1 8-8m-8 22 10-9M11 15l-1-7m1 7-6 1m15 0 1-8m-1 8 6 1m4 11 1-7m-1 7 6 1" />
+          </svg>
+          <span>枝のかたち</span>
+        </a>
+        <a class="github-link" href="https://github.com/tex2e/p5js-tree" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </header>
 
-    <form class="settings">
-      <h3>Drawing Settings</h3>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> GENERATIVE TREE STUDIO</p>
+        <h1 id="page-title">枝のかたちを、<span>育てる。</span></h1>
+        <p class="intro-copy">枝の広がりや密度を調整して、まだ見たことのない樹形を描いてみましょう。</p>
+      </section>
 
-      <div class="form-group">
-        <label for="js_branch_color">Color</label>
-        <div id="js_branch_color" class="input-group colorpicker-component">
-          <input type="text" value="#00AABB" class="form-control" />
-          <span class="input-group-addon"><i></i></span>
-        </div>
+      <div class="studio-layout">
+        <section class="artwork-panel" aria-label="生成された樹形">
+          <div class="artwork-topline">
+            <span class="artwork-label"><span class="live-dot"></span> LIVE CANVAS</span>
+            <span class="seed-caption">SEED <span id="seed-caption">2048</span></span>
+          </div>
+          <div id="canvas-holder" class="canvas-holder" aria-label="樹形のプレビュー"></div>
+          <div class="artwork-footer">
+            <span>ひとつの種から、無数の枝へ。</span>
+            <span class="artwork-index">TREE STUDY&nbsp; <span id="branch-count">—</span> SEGMENTS</span>
+          </div>
+        </section>
+
+        <aside class="control-panel" aria-label="作品の設定">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">YOUR CANVAS</p>
+              <h2>樹形を調整</h2>
+            </div>
+            <span class="panel-step">01 <span>/</span> 03</span>
+          </div>
+
+          <section class="control-section style-section" aria-labelledby="style-heading">
+            <div class="section-heading">
+              <h3 id="style-heading">色のスタイル</h3>
+              <span>COLOR</span>
+            </div>
+            <div class="style-options" role="group" aria-label="色のスタイル">
+              <button class="style-button is-active" type="button" data-preset="botanical" aria-pressed="true">
+                <span class="swatches" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>標本</span>
+              </button>
+              <button class="style-button" type="button" data-preset="spring" aria-pressed="false">
+                <span class="swatches spring-swatches" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>春霞</span>
+              </button>
+              <button class="style-button" type="button" data-preset="night" aria-pressed="false">
+                <span class="swatches night-swatches" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>夜の森</span>
+              </button>
+            </div>
+            <div class="color-options">
+              <label class="color-field" for="background-color"><span>背景</span><input id="background-color" type="color" value="#f2f0e8" aria-label="背景色"></label>
+              <label class="color-field" for="branch-color"><span>幹</span><input id="branch-color" type="color" value="#33453b" aria-label="幹の色"></label>
+              <label class="color-field" for="tip-color"><span>枝先</span><input id="tip-color" type="color" value="#8e9f76" aria-label="枝先の色"></label>
+            </div>
+          </section>
+
+          <section class="control-section" aria-labelledby="shape-heading">
+            <div class="section-heading">
+              <h3 id="shape-heading">枝のかたち</h3>
+              <span>SHAPE</span>
+            </div>
+            <div class="range-control">
+              <div class="range-label"><label for="depth">枝分かれの深さ</label><output for="depth" id="depth-value">9 段</output></div>
+              <input id="depth" type="range" min="5" max="11" step="1" value="9">
+              <div class="range-hint"><span>少ない</span><span>多い</span></div>
+            </div>
+            <div class="range-control">
+              <div class="range-label"><label for="density">枝の密度</label><output for="density" id="density-value">76%</output></div>
+              <input id="density" type="range" min="25" max="100" step="1" value="76">
+              <div class="range-hint"><span>すっきり</span><span>豊か</span></div>
+            </div>
+            <div class="range-control">
+              <div class="range-label"><label for="spread">枝の広がり</label><output for="spread" id="spread-value">34°</output></div>
+              <input id="spread" type="range" min="12" max="58" step="1" value="34">
+              <div class="range-hint"><span>まっすぐ</span><span>おおらか</span></div>
+            </div>
+            <div class="range-control">
+              <div class="range-label"><label for="roughness">自然なゆらぎ</label><output for="roughness" id="roughness-value">42%</output></div>
+              <input id="roughness" type="range" min="0" max="100" step="1" value="42">
+              <div class="range-hint"><span>整った</span><span>自由な</span></div>
+            </div>
+          </section>
+
+          <details class="advanced-settings">
+            <summary><span>仕上がりを調整</span><span class="advanced-note">線幅・枝の長さ・余白</span></summary>
+            <div class="advanced-body">
+              <div class="range-control">
+                <div class="range-label"><label for="thickness">幹の太さ</label><output for="thickness" id="thickness-value">5 px</output></div>
+                <input id="thickness" type="range" min="1" max="9" step="0.5" value="5">
+              </div>
+              <div class="range-control">
+                <div class="range-label"><label for="branch-length">枝の長さ</label><output for="branch-length" id="branch-length-value">70%</output></div>
+                <input id="branch-length" type="range" min="52" max="84" step="1" value="70">
+              </div>
+              <div class="range-control">
+                <div class="range-label"><label for="occupancy">画面いっぱいに描く</label><output for="occupancy" id="occupancy-value">82%</output></div>
+                <input id="occupancy" type="range" min="58" max="96" step="1" value="82">
+              </div>
+            </div>
+          </details>
+
+          <div class="seed-control">
+            <div class="seed-copy"><label for="seed-input">この樹形のシード</label><span>数字を変えると枝ぶりが変わります</span></div>
+            <input id="seed-input" type="number" min="1" max="999999" value="2048" inputmode="numeric" aria-label="シード番号">
+          </div>
+
+          <div class="action-buttons">
+            <button id="new-tree" class="button button-primary" type="button"><span aria-hidden="true">✳</span> 新しい樹形</button>
+            <button id="save-image" class="button button-secondary" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5v10m0 0 3.5-3.5M10 12.5 6.5 9M3 14v3h14v-3" /></svg> PNGで保存</button>
+          </div>
+          <p class="panel-footnote">設定を動かすと、その場でプレビューが更新されます。</p>
+        </aside>
       </div>
 
-      <div class="form-group">
-        <label for="js_nest">Nest</label><br>
-        <input id="js_nest" type="text"/>
-      </div>
-      <div class="form-group">
-        <label for="js_start_branch_length">Start Branch Length</label><br>
-        <input id="js_start_branch_length" type="text"/>
-      </div>
-
-      <br>
-
-      <div class="form-group">
-        <label for="js_right_branch_magnification_rate">Right Branch Magnification Rate</label>
-        <input id="js_right_branch_magnification_rate" type="text"/>
-      </div>
-      <div class="form-group">
-        <label for="js_center_branch_magnification_rate">Center Branch Magnification Rate</label>
-        <input id="js_center_branch_magnification_rate" type="text"/>
-      </div>
-      <div class="form-group">
-        <label for="js_left_branch_magnification_rate">Left Branch Magnification Rate</label>
-        <input id="js_left_branch_magnification_rate" type="text"/>
-      </div>
-
-      <br>
-
-      <div class="form-group">
-        <label for="js_right_rotation">Right Rotation</label><br>
-        <input id="js_right_rotation" type="text"/>
-      </div>
-      <div class="form-group">
-        <label for="js_center_rotation">Center Rotation</label>
-        <input id="js_center_rotation" type="text"/>
-      </div>
-      <div class="form-group">
-        <label for="js_left_rotation">Left Rotation</label><br>
-        <input id="js_left_rotation" type="text"/>
-      </div>
-
-      <br>
-
-      <div class="form-group">
-        <label for="js_right_rotation_rate">Right Rotation Rate</label>
-        <input id="js_right_rotation_rate" type="text"/>
-      </div>
-      <div class="form-group">
-        <label for="js_left_rotation_rate">Left Rotation Rate</label>
-        <input id="js_left_rotation_rate" type="text"/>
-      </div>
-
-      <button class="btn btn-primary" type="button" name="button" onclick="save('my-tree.png');">
-        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
-        Save
-      </button>
-      <button class="btn btn-success" type="button" name="button" onclick="drawTree();">
-        <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>
-        Redraw
-      </button>
-    </form>
-
-    <h1>Recursive Tree Renderer</h1>
-
-    <!-- core JavaScript ================================================== -->
+      <footer class="page-footer"><span>GENERATIVE BOTANY</span><span>MADE TO GROW, ONE BRANCH AT A TIME</span></footer>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
