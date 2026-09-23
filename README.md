@@ -9,11 +9,13 @@ a recursive tree generator
 Sample
 -------------
 
-![recursive tree 1](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree1.png)
-![recursive tree 2](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree2.png)
-![recursive tree 3](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree3.png)
-![recursive tree 4](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree4.png)
-![recursive tree 5](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree5.png)
-![recursive tree 6](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree6.png)
-![recursive tree 8](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree8.png)
-![recursive tree 9](https://github.com/tex2e/p5js-tree/blob/master/img/sample/tree9.png)
+![Generated tree (seed 2048)](img/sample/tree-seed-2048.png)
+
+![recursive tree 1](img/sample/tree1.png)
+![recursive tree 2](img/sample/tree2.png)
+![recursive tree 3](img/sample/tree3.png)
+![recursive tree 4](img/sample/tree4.png)
+![recursive tree 5](img/sample/tree5.png)
+![recursive tree 6](img/sample/tree6.png)
+![recursive tree 8](img/sample/tree8.png)
+![recursive tree 9](img/sample/tree9.png)
